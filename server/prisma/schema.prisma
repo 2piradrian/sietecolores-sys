@@ -8,9 +8,20 @@ datasource db {
 }
 
 model Product {
-  id      String @id @unique
-  name    String @default("Desconocido")
-  type    String @default("Desconocido")
-  size    String @default("Desconocido")
-  weight  Float  @default(0)
+  id     String @id @unique
+  name   String @default("Desconocido")
+  type   String @default("Desconocido")
+  size   String @default("Desconocido")
+  weight Float  @default(0)
+  // --- Optional Relation --- //
+  Budget   Budget? @relation(fields: [budgetId], references: [id])
+  budgetId String?
+}
+
+model Budget {
+  id        String    @id @unique
+  client    String    @default("Desconocido")
+  createdAt DateTime  @default(now())
+  total     Float     @default(0)
+  products  Product[]
 }
