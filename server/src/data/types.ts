@@ -5,3 +5,19 @@ export type Product = {
 	size: string;
 	weight: number;
 };
+
+export type BudgetProduct = {
+	id: string;
+	price: number;
+	quantity: number;
+	product: Product;
+	budget: Budget;
+};
+
+export type Budget = {
+	id: string;
+	client: string;
+	createAt: Date;
+	products: Product[];
+	total: number;
+};

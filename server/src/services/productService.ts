@@ -1,5 +1,4 @@
-import { Product } from "./../data/types";
-import { PrismaClient } from "@prisma/client";
+import { Product, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -25,6 +24,13 @@ export const ProductService = {
 				id,
 			},
 			data: product,
+		});
+	},
+	async deleteProduct(id: string): Promise<Product> {
+		return await prisma.product.delete({
+			where: {
+				id,
+			},
 		});
 	},
 };
