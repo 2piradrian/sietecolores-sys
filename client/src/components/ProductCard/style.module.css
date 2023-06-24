@@ -1,0 +1,28 @@
+.container {
+	height: 120px;
+	width: 300px;
+	margin: 12px;
+	padding: 5px;
+	border-radius: 8px;
+	background-color: var(--main);
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.container:hover {
+	transform: scale(1.05);
+}
+
+.id {
+	font-size: 22px;
+	font-weight: 800;
+}
+
+.name {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.weight {
+	margin: 10px 0px;
+}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 function useProducts() {
 	const [products, setProducts] = useState<Product[]>([]);
+	const [search, setSearch] = useState<string>("");
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -11,20 +12,34 @@ function useProducts() {
 		baseURL: "http://localhost:3333/products",
 	});
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const response: AxiosResponse<Product[]> = await instance.get("");
-				setProducts(response.data || []);
-				setError(null);
-				console.log(response);
-			} catch (error) {
-				setError("Error fetching products");
-			} finally {
-				setLoading(false);
-			}
-		};
+	const fetchProducts = async () => {
+		try {
+			const response: AxiosResponse<Product[]> = await instance.get("");
+			setProducts(response.data || []);
+			setError(null);
+			return response.data || [];
+		} catch (error) {
+			setError("Error fetching products");
+		} finally {
+			setLoading(false);
+		}
+	};
 
+	useEffect(() => {
+		const filterProducts = async () => {
+			const data = await fetchProducts();
+			const filteredProducts = data!.filter((product) => {
+				return (
+					product.name.toLowerCase().includes(search.toLowerCase()) ||
+					product.id.toLowerCase().includes(search.toLowerCase())
+				);
+			});
+			setProducts(filteredProducts);
+		};
+		filterProducts();
+	}, [search]);
+
+	useEffect(() => {
 		fetchProducts();
 	}, []);
 
@@ -73,6 +88,7 @@ function useProducts() {
 	};
 
 	return {
+		setSearch,
 		products,
 		loading,
 		error,
