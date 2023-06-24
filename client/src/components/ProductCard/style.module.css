@@ -5,6 +5,7 @@
 	padding: 5px;
 	border-radius: 8px;
 	background-color: var(--main);
+	color: var(--contrast);
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
 }
