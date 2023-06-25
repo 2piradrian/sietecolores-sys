@@ -11,9 +11,12 @@ export const BudgetService = {
 			where: {
 				id,
 			},
+			include: {
+				products: true,
+			},
 		});
 	},
-	async createBudget(budget: Budget): Promise<Budget> {
+	async createBudget(budget: any): Promise<Budget> {
 		return await prisma.budget.create({
 			data: budget,
 		});
@@ -22,6 +25,9 @@ export const BudgetService = {
 		return await prisma.budget.update({
 			where: {
 				id,
+			},
+			include: {
+				products: true,
 			},
 			data: {
 				products: {

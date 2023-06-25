@@ -14,23 +14,27 @@ export const BudgetController = {
 		res.json(budget || {});
 	},
 	async createBudget(req: Request, res: Response) {
-		const { budgetProducts, client, total } = req.body;
+		const { products, client } = req.body;
+
+		const total = products.reduce((acc: number, curr: any) => {
+			return acc + curr.price * curr.quantity;
+		}, 0);
+
+		const newBudget = await BudgetService.createBudget({
+			client: client,
+			total: Number(total),
+			createdAt: new Date(),
+		});
 
 		const createdBudgetProducts = await Promise.all(
-			budgetProducts.map(async (budgetProduct: BudgetProduct) => {
+			products.map(async (budgetProduct: BudgetProduct) => {
+				budgetProduct.budgetId = newBudget.id;
 				return await BudgetProductService.createBudgetProduct(budgetProduct);
 			})
 		);
 
-		const newBudget = await BudgetService.createBudget({
-			client: client,
-			total: total,
-			createdAt: new Date(),
-			id: "",
-		});
+		const finalBudget = await BudgetService.updateBudget(newBudget.id, createdBudgetProducts);
 
-		await BudgetService.updateBudget(newBudget.id, createdBudgetProducts);
-
-		res.json(newBudget || {});
+		res.json(finalBudget || {});
 	},
 };

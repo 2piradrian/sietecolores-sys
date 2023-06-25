@@ -4,7 +4,6 @@ import { ProductService } from "../services/productService";
 export const ProductController = {
 	async getAllProducts(req: Request, res: Response) {
 		const products = await ProductService.getAllProducts();
-		console.log(products);
 		res.json(products || []);
 	},
 	async getProductById(req: Request, res: Response) {
