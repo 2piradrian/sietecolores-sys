@@ -1,33 +1,33 @@
-import { Product, PrismaClient } from "@prisma/client";
+import { Products, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export const ProductService = {
-	async getAllProducts(): Promise<Product[]> {
-		return await prisma.product.findMany();
+	async getAllProducts(): Promise<Products[]> {
+		return await prisma.products.findMany();
 	},
-	async getProductById(id: string): Promise<Product | null> {
-		return await prisma.product.findUnique({
+	async getProductById(id: string): Promise<Products | null> {
+		return await prisma.products.findUnique({
 			where: {
 				id,
 			},
 		});
 	},
-	async createProduct(product: Product): Promise<Product> {
-		return await prisma.product.create({
+	async createProduct(product: Products): Promise<Products> {
+		return await prisma.products.create({
 			data: product,
 		});
 	},
-	async updateProduct(id: string, product: Product): Promise<Product> {
-		return await prisma.product.update({
+	async updateProduct(id: string, product: Products): Promise<Products> {
+		return await prisma.products.update({
 			where: {
 				id,
 			},
 			data: product,
 		});
 	},
-	async deleteProduct(id: string): Promise<Product> {
-		return await prisma.product.delete({
+	async deleteProduct(id: string): Promise<Products> {
+		return await prisma.products.delete({
 			where: {
 				id,
 			},

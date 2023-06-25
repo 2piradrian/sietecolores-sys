@@ -6,7 +6,7 @@ export const BudgetService = {
 	async getAllBudgets(): Promise<Budget[]> {
 		return await prisma.budget.findMany();
 	},
-	async getBudgetById(id: number): Promise<Budget | null> {
+	async getBudgetById(id: string): Promise<Budget | null> {
 		return await prisma.budget.findUnique({
 			where: {
 				id,
@@ -18,7 +18,7 @@ export const BudgetService = {
 			data: budget,
 		});
 	},
-	async updateBudget(id: number, createdBudgetProducts: Budget[]): Promise<Budget> {
+	async updateBudget(id: string, createdBudgetProducts: Budget[]): Promise<Budget> {
 		return await prisma.budget.update({
 			where: {
 				id,
@@ -32,7 +32,7 @@ export const BudgetService = {
 			},
 		});
 	},
-	async deleteBudget(id: number): Promise<Budget> {
+	async deleteBudget(id: string): Promise<Budget> {
 		return await prisma.budget.delete({
 			where: {
 				id,

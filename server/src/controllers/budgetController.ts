@@ -10,7 +10,7 @@ export const BudgetController = {
 	},
 	async getBudgetById(req: Request, res: Response) {
 		const { id } = req.params;
-		const budget = await BudgetService.getBudgetById(parseInt(id));
+		const budget = await BudgetService.getBudgetById(id);
 		res.json(budget || {});
 	},
 	async createBudget(req: Request, res: Response) {
@@ -26,7 +26,7 @@ export const BudgetController = {
 			client: client,
 			total: total,
 			createdAt: new Date(),
-			id: 0,
+			id: "",
 		});
 
 		await BudgetService.updateBudget(newBudget.id, createdBudgetProducts);
