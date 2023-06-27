@@ -1,11 +1,11 @@
 :root {
 	--main: #ff8ba7;
-	--secondary: #9e1f1f;
-	--tertiary: #9e1f1f;
-	--background: #212121;
-	--secondaryBackground: #1e1e1e;
-	--tertiaryBackground: #2b2b2b;
-	--contrast: #ffffff;
-	--secondaryContrast: #e0e0e0;
-	--tertiaryContrast: #bdbdbd;
+	--secondary: #faeee7;
+	--tertiary: #c3f0ca;
+	--background: #fffffe;
+	--contrast: #212121;
+	--secondaryBackground: rgb(250, 238, 231);
+	--alternative: #ffc6c7;
+	--alternative2: #594a4e;
+	--alternative3: #33272a;
 }

@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar/Sidebar";
 import Head from "next/head";
 
 type Props = {
@@ -14,6 +15,7 @@ export default function AppLayout({ children, title }: Props) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<Sidebar />
 			<main>{children}</main>
 		</>
 	);
