@@ -1,4 +1,4 @@
-import { Product } from "@/types/types";
+import { Product, ProductForm } from "@/types/types";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
@@ -58,6 +58,7 @@ function useProducts() {
 		try {
 			const response: AxiosResponse<Product> = await instance.post("", product);
 			setError(null);
+			await fetchProducts();
 			return response.data || null;
 		} catch (error) {
 			setError("Error creating product");
@@ -65,9 +66,10 @@ function useProducts() {
 		}
 	};
 
-	const updateProduct = async (id: string, product: Product): Promise<Product | null> => {
+	const updateProduct = async (id: string, product: ProductForm): Promise<Product | null> => {
 		try {
 			const response: AxiosResponse<Product> = await instance.put(id, product);
+			await fetchProducts();
 			setError(null);
 			return response.data || null;
 		} catch (error) {
@@ -79,6 +81,7 @@ function useProducts() {
 	const deleteProduct = async (id: string): Promise<Product | null> => {
 		try {
 			const response: AxiosResponse<Product> = await instance.delete(id);
+			await fetchProducts();
 			setError(null);
 			return response.data || null;
 		} catch (error) {

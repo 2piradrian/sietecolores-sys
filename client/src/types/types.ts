@@ -7,6 +7,14 @@ export type Product = {
 	weight: number;
 };
 
+export type ProductForm = {
+	code: string;
+	name: string;
+	type: string;
+	size: string;
+	weight: number;
+};
+
 export type BudgetProduct = {
 	id: string;
 	price: number;
