@@ -1,10 +1,9 @@
 import React from "react";
-import style from "./style.module.css";
 import useProducts from "@/hooks/useProducts";
-import { Product } from "@/types/types";
-import ProductCard from "@/components/ProductCard/ProductCard";
 import SearchForm from "@/components/SearchForm/SearchForm";
 import Title from "@/components/Title/Title";
+import ProductTable from "@/components/ProductTable/ProductTable";
+import style from "./style.module.css";
 
 function ProductSection() {
 	const { error, products, setSearch } = useProducts();
@@ -13,11 +12,7 @@ function ProductSection() {
 		<div className="bigcontainer">
 			<Title title="Productos" />
 			<SearchForm setSearch={setSearch} />
-			<div className={style.productContainer}>
-				{products?.map((product: Product) => (
-					<ProductCard key={product.id} {...product} />
-				))}
-			</div>
+			<ProductTable products={products} />
 			<h2>{error}</h2>
 		</div>
 	);
