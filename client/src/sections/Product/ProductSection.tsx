@@ -7,7 +7,7 @@ import style from "./style.module.css";
 import UpdateForm from "@/components/UpdateForm/UpdateForm";
 
 function ProductSection() {
-	const { error, products, setSearch } = useProducts();
+	const { error, products, setSearch, getProductById, updateProduct } = useProducts();
 
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState("");
@@ -27,7 +27,14 @@ function ProductSection() {
 				)}
 				<h2 className={style.error}>{error}</h2>
 			</div>
-			{open && <UpdateForm id={id} setOpen={setOpen} />}
+			{open && (
+				<UpdateForm
+					id={id}
+					setOpen={setOpen}
+					getProductById={getProductById}
+					updateProduct={updateProduct}
+				/>
+			)}
 		</>
 	);
 }

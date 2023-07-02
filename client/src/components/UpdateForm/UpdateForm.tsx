@@ -1,16 +1,16 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import style from "./style.module.css";
-import useProducts from "@/hooks/useProducts";
-import { Product } from "@/types/types";
+import { Product, ProductForm } from "@/types/types";
 import UpdateInputs from "./UpdateInputs";
 
 type Props = {
 	id: string;
 	setOpen: (open: boolean) => void;
+	getProductById: (id: string) => Promise<Product | null>;
+	updateProduct: (id: string, product: ProductForm) => void;
 };
 
-function UpdateForm({ id, setOpen }: Props) {
-	const { getProductById, updateProduct } = useProducts();
+function UpdateForm({ id, setOpen, getProductById, updateProduct }: Props) {
 	const [product, setProduct] = useState<Product | undefined>(undefined);
 
 	useEffect(() => {
