@@ -5,15 +5,25 @@ import Title from "@/components/Title/Title";
 import ProductTable from "@/components/ProductTable/ProductTable";
 import style from "./style.module.css";
 import UpdateForm from "@/components/UpdateForm/UpdateForm";
+import CreateForm from "@/components/CreateForm/CreateForm";
 
 function ProductSection() {
-	const { error, products, setSearch, getProductById, updateProduct } = useProducts();
+	const {
+		error,
+		products,
+		setSearch,
+		getProductById,
+		updateProduct,
+		createProduct,
+		deleteProduct,
+	} = useProducts();
 
-	const [open, setOpen] = useState(false);
+	const [openUpdate, setOpenUpdate] = useState(false);
+	const [openCreate, setOpenCreate] = useState(false);
 	const [id, setId] = useState("");
 
 	const handleForm = (id: string) => {
-		setOpen(true);
+		setOpenUpdate(true);
 		setId(id);
 	};
 
@@ -27,14 +37,26 @@ function ProductSection() {
 				)}
 				<h2 className={style.error}>{error}</h2>
 			</div>
-			{open && (
+			{openUpdate && (
 				<UpdateForm
 					id={id}
-					setOpen={setOpen}
+					setOpen={setOpenUpdate}
 					getProductById={getProductById}
 					updateProduct={updateProduct}
+					deleteProduct={deleteProduct}
 				/>
 			)}
+			{openCreate && (
+				<CreateForm
+					id={id}
+					setOpen={setOpenCreate}
+					getProductById={getProductById}
+					createProduct={createProduct}
+				/>
+			)}
+			<div className={style.createButton} onClick={() => setOpenCreate(true)}>
+				+
+			</div>
 		</>
 	);
 }

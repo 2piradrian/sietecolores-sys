@@ -54,7 +54,7 @@ function useProducts() {
 		}
 	};
 
-	const createProduct = async (product: Product): Promise<Product | null> => {
+	const createProduct = async (product: ProductForm): Promise<Product | null> => {
 		try {
 			const response: AxiosResponse<Product> = await instance.post("", product);
 			setError(null);

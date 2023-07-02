@@ -1,11 +1,15 @@
-import { ProductForm } from "@/types/types";
-import { useEffect, useState } from "react";
+import { Product, ProductForm } from "@/types/types";
+import { useState } from "react";
+import style from "./style.module.css";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
 type Props = {
-	product: ProductForm | undefined;
+	product: Product | undefined;
+	setOpen: (isOpen: boolean) => void;
+	deleteProduct: (id: string) => void;
 };
 
-function UpdateInputs({ product }: Props) {
+function UpdateInputs({ product, setOpen, deleteProduct }: Props) {
 	const [formData, setFormData] = useState<ProductForm>({
 		code: product!.code,
 		name: product!.name,
@@ -64,7 +68,20 @@ function UpdateInputs({ product }: Props) {
 				value={formData.weight}
 				onChange={handleInputChange}
 			/>
-			<button type="submit">Actualizar</button>
+			<div className={style.buttonContainer}>
+				<button type="submit">Actualizar</button>
+				<button type="button" onClick={() => setOpen(false)}>
+					Cancelar
+				</button>
+			</div>
+			<div
+				className={style.delete}
+				onClick={() => {
+					deleteProduct(product!.id);
+					setOpen(false);
+				}}>
+				<MdOutlineDeleteForever />
+			</div>
 		</>
 	);
 }
