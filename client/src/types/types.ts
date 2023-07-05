@@ -7,6 +7,14 @@ export type Product = {
 	weight: number;
 };
 
+export type QuantityProduct = {
+	id: string;
+	code: string;
+	name: string;
+	quantity: number;
+	weight: number;
+};
+
 export type ProductForm = {
 	code: string;
 	name: string;
