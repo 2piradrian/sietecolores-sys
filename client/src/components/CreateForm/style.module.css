@@ -45,11 +45,13 @@
 	justify-content: center;
 }
 
-.inputs > input {
+.inputs > input,
+.inputs > select {
 	width: 300px;
 	height: 40px;
 	border-radius: 5px;
 	border: 2px solid var(--main);
+	background-color: var(--background);
 	outline: none;
 	margin: 2px 0;
 	padding: 0 10px;

@@ -31,7 +31,7 @@ function useProducts() {
 			const filteredProducts = data!.filter((product) => {
 				return (
 					product.name.toLowerCase().includes(search.toLowerCase()) ||
-					product.id.toLowerCase().includes(search.toLowerCase())
+					product.code.toLowerCase().includes(search.toLowerCase())
 				);
 			});
 			setProducts(filteredProducts);
