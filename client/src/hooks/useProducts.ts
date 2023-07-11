@@ -55,6 +55,18 @@ function useProducts() {
 	};
 
 	const createProduct = async (product: ProductForm): Promise<Product | null> => {
+		if (!product.name || !product.code || !product.size || !product.weight || !product.type) {
+			setError("Error creating product");
+			alert("Rellena todos los campos");
+			return null;
+		}
+		// already exists
+		const exists = products.find((p) => p.code === product.code);
+		if (exists) {
+			setError("Error creating product");
+			alert("El código ya existe");
+			return null;
+		}
 		try {
 			const response: AxiosResponse<Product> = await instance.post("", product);
 			setError(null);
@@ -67,6 +79,11 @@ function useProducts() {
 	};
 
 	const updateProduct = async (id: string, product: ProductForm): Promise<Product | null> => {
+		if (!product.name || !product.code || !product.size || !product.weight || !product.type) {
+			setError("Error creating product");
+			alert("Rellena todos los campos");
+			return null;
+		}
 		try {
 			const response: AxiosResponse<Product> = await instance.put(id, product);
 			await fetchProducts();
