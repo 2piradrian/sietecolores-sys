@@ -7,17 +7,17 @@ export type Product = {
 };
 
 export type BudgetProduct = {
-	id: string;
-	price: number;
+	code: string;
+	name: string;
 	quantity: number;
-	product: Product;
-	budget: Budget;
+	weight: number;
 };
 
 export type Budget = {
 	id: string;
+	price: number;
 	client: string;
-	createAt: Date;
-	products: Product[];
+	createdAt: number;
+	products: BudgetProduct[];
 	total: number;
 };

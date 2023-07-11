@@ -8,34 +8,27 @@ datasource db {
 }
 
 model Products {
-  id     String @id @map("_id") @db.ObjectId @default(auto())
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
   code   String @unique
   name   String @default("Desconocido")
   type   String @default("Desconocido")
   size   String @default("Desconocido")
   weight Float  @default(0)
-
-  BudgetProduct BudgetProduct[]
 }
 
 model BudgetProduct {
-  id        String    @id @map("_id") @db.ObjectId @default(auto())
-  price     Float     @default(0) // El precio es unitario
-  quantity  Int       @default(1)
-
-  product   Products  @relation(fields: [productId], references: [id])
-  productId String    @db.ObjectId
-  budget    Budget    @relation(fields: [budgetId], references: [id])
-  budgetId  String    @db.ObjectId
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  code     String
+  name     String
+  quantity Int
+  weight   Float
 }
 
 model Budget {
-  id        String          @id @map("_id") @db.ObjectId @default(auto())
+  id        String          @id @default(auto()) @map("_id") @db.ObjectId
   client    String          @default("Desconocido")
   createdAt DateTime        @default(now())
   total     Float           @default(0)
-
-  products  BudgetProduct[]
+  price     Float           @default(0)
+  products  Json?
 }
-
-

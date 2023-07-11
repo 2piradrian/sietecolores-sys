@@ -1,7 +1,6 @@
+import { BudgetProduct } from "../data/types";
 import { Request, Response } from "express";
 import { BudgetService } from "../services/budgetService";
-import { BudgetProductService } from "../services/budgetProductService";
-import { BudgetProduct } from "@prisma/client";
 
 export const BudgetController = {
 	async getAllBudgets(req: Request, res: Response) {
@@ -14,27 +13,22 @@ export const BudgetController = {
 		res.json(budget || {});
 	},
 	async createBudget(req: Request, res: Response) {
-		const { products, client } = req.body;
+		const budget = req.body;
 
-		const total = products.reduce((acc: number, curr: any) => {
-			return acc + curr.price * curr.quantity;
-		}, 0);
+		console.log(budget);
 
-		const newBudget = await BudgetService.createBudget({
-			client: client,
-			total: Number(total),
-			createdAt: new Date(),
+		let total = 0;
+
+		budget.products.map((product: BudgetProduct) => {
+			total += product.weight * budget.price * product.quantity;
 		});
 
-		const createdBudgetProducts = await Promise.all(
-			products.map(async (budgetProduct: BudgetProduct) => {
-				budgetProduct.budgetId = newBudget.id;
-				return await BudgetProductService.createBudgetProduct(budgetProduct);
-			})
-		);
+		budget.total = total;
 
-		const finalBudget = await BudgetService.updateBudget(newBudget.id, createdBudgetProducts);
+		delete budget.id;
 
-		res.json(finalBudget || {});
+		const newBudget = await BudgetService.createBudget(budget);
+
+		res.json(newBudget);
 	},
 };

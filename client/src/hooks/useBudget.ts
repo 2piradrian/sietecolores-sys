@@ -1,6 +1,7 @@
 import { Budget, BudgetProduct, Product } from "@/types/types";
 import { useState } from "react";
 import useProducts from "./useProducts";
+import axios, { AxiosResponse } from "axios";
 
 function useBudget() {
 	const { products } = useProducts();
@@ -9,10 +10,31 @@ function useBudget() {
 		id: "",
 		client: "",
 		price: 0,
-		createdAt: Date.now(),
+		createdAt: new Date(),
 		products: [],
 		total: 0,
 	});
+
+	const instance = axios.create({
+		baseURL: "http://localhost:3333/budgets",
+	});
+
+	const createBudget = async (): Promise<Product | null> => {
+		if (budget.products.length === 0 || !budget.price || !budget.client) {
+			alert("No se puede crear un presupuesto sin productos, precio o cliente");
+			return null;
+		}
+		try {
+			const response: AxiosResponse<Product> = await instance.post("", budget);
+			if (response.data) {
+				alert("Presupuesto creado con éxito");
+			}
+			return response.data;
+		} catch (error) {
+			alert("Error al crear el presupuesto");
+			return null;
+		}
+	};
 
 	const addProduct = (code: string) => {
 		const existingProduct = budget.products.find((product) => product.code === code);
@@ -65,7 +87,15 @@ function useBudget() {
 		setBudget({ ...budget, price, client });
 	};
 
-	return { products, budget, addProduct, subtractProduct, getTotal, setPriceAndClient };
+	return {
+		products,
+		budget,
+		addProduct,
+		subtractProduct,
+		getTotal,
+		setPriceAndClient,
+		createBudget,
+	};
 }
 
 export default useBudget;

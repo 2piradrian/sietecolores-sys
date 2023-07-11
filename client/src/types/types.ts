@@ -9,7 +9,7 @@ export type Budget = {
 	id: string;
 	price: number;
 	client: string;
-	createdAt: number;
+	createdAt: Date;
 	products: BudgetProduct[];
 	total: number;
 };

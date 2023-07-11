@@ -6,8 +6,15 @@ import Title from "@/components/Title/Title";
 import useBudget from "@/hooks/useBudget";
 
 function BudgetSection() {
-	const { products, budget, addProduct, subtractProduct, getTotal, setPriceAndClient } =
-		useBudget();
+	const {
+		products,
+		budget,
+		addProduct,
+		subtractProduct,
+		getTotal,
+		setPriceAndClient,
+		createBudget,
+	} = useBudget();
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -42,6 +49,13 @@ function BudgetSection() {
 						onClick={(code: string) => subtractProduct(code)}
 					/>
 				</div>
+			</div>
+			<div
+				className={style.createButton}
+				onClick={() => {
+					createBudget();
+				}}>
+				+
 			</div>
 		</div>
 	);

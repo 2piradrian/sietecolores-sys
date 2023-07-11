@@ -11,31 +11,11 @@ export const BudgetService = {
 			where: {
 				id,
 			},
-			include: {
-				products: true,
-			},
 		});
 	},
 	async createBudget(budget: any): Promise<Budget> {
 		return await prisma.budget.create({
 			data: budget,
-		});
-	},
-	async updateBudget(id: string, createdBudgetProducts: Budget[]): Promise<Budget> {
-		return await prisma.budget.update({
-			where: {
-				id,
-			},
-			include: {
-				products: true,
-			},
-			data: {
-				products: {
-					connect: createdBudgetProducts.map((product) => ({
-						id: product.id,
-					})),
-				},
-			},
 		});
 	},
 	async deleteBudget(id: string): Promise<Budget> {
