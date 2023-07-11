@@ -62,7 +62,7 @@ function useStadistics() {
 
 	const top10ProductsByYear = Object.entries(productSalesByYear)
 		.sort((a, b) => b[1] - a[1])
-		.slice(0, 10)
+		.slice(0, 5)
 		.map(([code, sales]) => ({ code, sales }));
 
 	// Top 10 de productos más vendidos en el mes
@@ -79,7 +79,7 @@ function useStadistics() {
 
 	const top10ProductsByMonth = Object.entries(productSalesByMonth)
 		.sort((a, b) => b[1] - a[1])
-		.slice(0, 10)
+		.slice(0, 5)
 		.map(([code, sales]) => ({ code, sales }));
 
 	// Devuelve las estadísticas o cualquier otro valor que desees exponer como resultado del hook
