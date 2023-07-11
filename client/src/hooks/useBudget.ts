@@ -1,10 +1,12 @@
 import { Budget, BudgetProduct, Product } from "@/types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useProducts from "./useProducts";
 import axios, { AxiosResponse } from "axios";
 
 function useBudget() {
 	const { products } = useProducts();
+
+	const [budgetList, setBudgetList] = useState<Budget[]>([]);
 
 	const [budget, setBudget] = useState<Budget>({
 		id: "",
@@ -14,6 +16,14 @@ function useBudget() {
 		products: [],
 		total: 0,
 	});
+
+	useEffect(() => {
+		const getBudgets = async () => {
+			const response: AxiosResponse<Budget[]> = await instance.get("");
+			setBudgetList(response.data);
+		};
+		getBudgets();
+	}, []);
 
 	const instance = axios.create({
 		baseURL: "http://localhost:3333/budgets",
@@ -95,6 +105,7 @@ function useBudget() {
 		getTotal,
 		setPriceAndClient,
 		createBudget,
+		budgetList,
 	};
 }
 

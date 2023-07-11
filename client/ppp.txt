@@ -1,0 +1,78 @@
+// Supongamos que tienes la lista de budgets almacenada en una variable llamada 'budgets'
+// Puedes reemplazar 'budgets' con el nombre de tu variable en tu código real
+
+// Cantidad de productos vendidos en el mes
+const productsSoldInMonth = budgets.reduce((count, budget) => {
+  return (
+    count +
+    budget.products.reduce((productCount, product) => {
+      return productCount + product.quantity;
+    }, 0)
+  );
+}, 0);
+
+// Cantidad de gramos vendidos en el mes
+const gramsSoldInMonth = budgets.reduce((count, budget) => {
+  return (
+    count +
+    budget.products.reduce((gramsCount, product) => {
+      return gramsCount + product.quantity * product.weight;
+    }, 0)
+  );
+}, 0);
+
+// Cantidad de presupuestos calculados en el mes
+const budgetsCalculatedInMonth = budgets.length;
+
+// Producto más vendido del mes
+const soldProductsInMonth = budgets.flatMap((budget) => budget.products);
+const productSoldMostInMonth = soldProductsInMonth.reduce((mostSoldProduct, product) => {
+  if (!mostSoldProduct || product.quantity > mostSoldProduct.quantity) {
+    return product;
+  }
+  return mostSoldProduct;
+}, null);
+
+// Producto más vendido del año
+const productSoldMostInYear = soldProductsInMonth.reduce((mostSoldProduct, product) => {
+  if (!mostSoldProduct || product.quantity > mostSoldProduct.quantity) {
+    return product;
+  }
+  return mostSoldProduct;
+}, null);
+
+// Top 10 de productos más vendidos en el año
+const productSalesByYear = soldProductsInMonth.reduce((salesByProduct, product) => {
+  if (!salesByProduct[product.code]) {
+    salesByProduct[product.code] = 0;
+  }
+  salesByProduct[product.code] += product.quantity;
+  return salesByProduct;
+}, {});
+
+const top10ProductsByYear = Object.entries(productSalesByYear)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10)
+  .map(([code, sales]) => ({ code, sales }));
+
+// Top 10 de productos más vendidos en el mes
+const productSalesByMonth = soldProductsInMonth.reduce((salesByProduct, product) => {
+  if (!salesByProduct[product.code]) {
+    salesByProduct[product.code] = 0;
+  }
+  salesByProduct[product.code] += product.quantity;
+  return salesByProduct;
+}, {});
+
+const top10ProductsByMonth = Object.entries(productSalesByMonth)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10)
+  .map(([code, sales]) => ({ code, sales }));
+
+console.log('Cantidad de productos vendidos en el mes:', productsSoldInMonth);
+console.log('Cantidad de gramos vendidos en el mes:', gramsSoldInMonth);
+console.log('Cantidad de presupuestos calculados en el mes:', budgetsCalculatedInMonth);
+console.log('Producto más vendido del mes:', productSoldMostInMonth);
+console.log('Producto más vendido del año:', productSoldMostInYear);
+console.log('Top 10 productos más vendidos en el año:', top10ProductsByYear);
+console.log('Top 10 productos más vendidos en el mes:', top10ProductsByMonth);

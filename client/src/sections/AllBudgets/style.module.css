@@ -1,0 +1,22 @@
+.tableContainer {
+	width: 80%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--background);
+	z-index: 999;
+}
+
+.tableContainer > p {
+	font-size: 1.5rem;
+	font-weight: 500;
+	color: var(--text);
+}
+
+.tableContainer > table {
+	margin: 20px 0px;
+	position: relative;
+}

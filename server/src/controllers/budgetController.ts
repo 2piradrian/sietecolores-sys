@@ -15,8 +15,6 @@ export const BudgetController = {
 	async createBudget(req: Request, res: Response) {
 		const budget = req.body;
 
-		console.log(budget);
-
 		let total = 0;
 
 		budget.products.map((product: BudgetProduct) => {

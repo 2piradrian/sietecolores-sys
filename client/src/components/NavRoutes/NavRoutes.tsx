@@ -1,7 +1,6 @@
 import NavItem from "../NavItem/NavItem";
 import { AiFillHome } from "react-icons/ai";
-import { MdFavorite } from "react-icons/md";
-import { FaBook } from "react-icons/fa";
+import { FaBook, FaBookMedical } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import style from "./style.module.css";
 
@@ -14,7 +13,8 @@ function NavRoutes({ state }: Props) {
 		<div className={style.routes}>
 			<NavItem icon={<AiFillHome />} name="Home" route="/" state={state} />
 			<NavItem icon={<FaSearch />} name="Productos" route="/products" state={state} />
-			<NavItem icon={<FaBook />} name="Presupuestos" route="/budgets" state={state} />
+			<NavItem icon={<FaBookMedical />} name="Presupuestar" route="/budgets" state={state} />
+			<NavItem icon={<FaBook />} name="Presupuestos" route="/allbudgets" state={state} />
 		</div>
 	);
 }

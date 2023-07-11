@@ -27,7 +27,7 @@ function BudgetSection() {
 
 	return (
 		<div className="bigcontainer">
-			<Title title="Presupuesto" />
+			<Title title="Nuevo Presupuesto" />
 			<form onSubmit={handleSubmit}>
 				<input type="number" placeholder="Gramo" name="price" className={style.input} />
 				<input type="text" placeholder="Cliente" name="client" className={style.input} />
@@ -45,7 +45,8 @@ function BudgetSection() {
 				</div>
 				<div className={style.tablecontainer}>
 					<BudgetTable
-						budget={budget}
+						products={budget.products}
+						price={budget.price}
 						onClick={(code: string) => subtractProduct(code)}
 					/>
 				</div>

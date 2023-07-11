@@ -4,7 +4,7 @@ import React from "react";
 
 function Budgets() {
 	return (
-		<AppLayout title="Home">
+		<AppLayout title="Presupuestar">
 			<BudgetSection />
 		</AppLayout>
 	);
