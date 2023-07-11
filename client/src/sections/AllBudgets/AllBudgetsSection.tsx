@@ -28,10 +28,16 @@ function AllBudgetsSection() {
 				setTotal={setTotal}
 			/>
 			{open && (
-				<div className={`bigcontainer ${style.tableContainer}`}>
+				<div className={style.tableContainer}>
 					<h1>Presupuesto: Siete Colores</h1>
 					<h4>Documento no válido como factura</h4>
-					<BudgetTable products={products} price={price} onClick={() => setOpen(false)} />
+					<div className={style.tablediv}>
+						<BudgetTable
+							products={products}
+							price={price}
+							onClick={() => setOpen(false)}
+						/>
+					</div>
 					<p>Total: $ {total}</p>
 					<div className={style.button} onClick={handlePrint}>
 						Imprimir
