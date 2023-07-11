@@ -1,6 +1,6 @@
 .tableContainer {
-	width: 80%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -19,4 +19,30 @@
 .tableContainer > table {
 	margin: 20px 0px;
 	position: relative;
+}
+
+.button {
+	width: 200px;
+	height: 40px;
+	padding: 10px;
+	border-radius: 8px;
+	outline: none;
+	border: 0px;
+	margin: 10px;
+	background-color: var(--main);
+	border: 2px solid var(--main);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media print {
+	.tableContainer {
+		padding: 50px 20px;
+		justify-content: start;
+	}
+	.button {
+		display: none;
+	}
 }

@@ -13,6 +13,10 @@ function AllBudgetsSection() {
 	const [price, setPrice] = useState(0);
 	const [total, setTotal] = useState(0);
 
+	const handlePrint = () => {
+		window.print();
+	};
+
 	return (
 		<div className="bigcontainer">
 			<Title title="Lista de presupuestos" />
@@ -24,9 +28,14 @@ function AllBudgetsSection() {
 				setTotal={setTotal}
 			/>
 			{open && (
-				<div className={style.tableContainer}>
+				<div className={`bigcontainer ${style.tableContainer}`}>
+					<h1>Presupuesto: Siete Colores</h1>
+					<h4>Documento no válido como factura</h4>
 					<BudgetTable products={products} price={price} onClick={() => setOpen(false)} />
 					<p>Total: $ {total}</p>
+					<div className={style.button} onClick={handlePrint}>
+						Imprimir
+					</div>
 				</div>
 			)}
 		</div>

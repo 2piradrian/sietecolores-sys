@@ -25,7 +25,9 @@ function BudgetTable({ products, price, onClick }: Props) {
 					<td className={style.tableCell}>{product.code}</td>
 					<td className={style.tableCell}>{product.name}</td>
 					<td className={style.tableCell}>{product.quantity}</td>
-					<td className={style.tableCell}>{product.weight * price * product.quantity}</td>
+					<td className={style.tableCell}>
+						$ {product.weight * price * product.quantity}
+					</td>
 				</tr>
 			))}
 		</table>
