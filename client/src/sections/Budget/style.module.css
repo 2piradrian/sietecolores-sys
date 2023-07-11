@@ -12,7 +12,7 @@
 }
 
 .input {
-	width: 300px;
+	width: 200px;
 	height: 40px;
 	padding: 10px;
 	border-radius: 8px;
@@ -20,6 +20,19 @@
 	border: 0px;
 	margin: 10px;
 	border: 2px solid var(--main);
+}
+
+.button {
+	width: 200px;
+	height: 40px;
+	padding: 10px;
+	border-radius: 8px;
+	outline: none;
+	border: 0px;
+	margin: 10px;
+	background-color: var(--main);
+	border: 2px solid var(--main);
+	cursor: pointer;
 }
 
 .total {

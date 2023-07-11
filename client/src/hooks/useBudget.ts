@@ -61,11 +61,11 @@ function useBudget() {
 		return total;
 	};
 
-	const setPrice = (price: number) => {
-		setBudget({ ...budget, price });
+	const setPriceAndClient = (price: number, client: string) => {
+		setBudget({ ...budget, price, client });
 	};
 
-	return { products, budget, addProduct, subtractProduct, getTotal, setPrice };
+	return { products, budget, addProduct, subtractProduct, getTotal, setPriceAndClient };
 }
 
 export default useBudget;
