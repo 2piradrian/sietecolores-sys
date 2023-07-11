@@ -1,14 +1,13 @@
 import React from "react";
 import style from "./style.module.css";
-import { QuantityProduct } from "@/types/types";
+import { Budget } from "@/types/types";
 
 type Props = {
-	products: QuantityProduct[];
-	price: number;
+	budget: Budget;
 	onClick: (id: string) => void;
 };
 
-function BudgetTable({ products, onClick, price }: Props) {
+function BudgetTable({ budget, onClick }: Props) {
 	return (
 		<table className={style.productTable}>
 			<tr>
@@ -17,12 +16,17 @@ function BudgetTable({ products, onClick, price }: Props) {
 				<th className={style.tableHeader}>Cant.</th>
 				<th className={style.tableHeader}>Precio</th>
 			</tr>
-			{products.map((product) => (
-				<tr className={style.tableRow} key={product.id} onClick={() => onClick(product.id)}>
+			{budget.products.map((product) => (
+				<tr
+					className={style.tableRow}
+					key={product.code}
+					onClick={() => onClick(product.code)}>
 					<td className={style.tableCell}>{product.code}</td>
 					<td className={style.tableCell}>{product.name}</td>
 					<td className={style.tableCell}>{product.quantity}</td>
-					<td className={style.tableCell}>{product.weight * price * product.quantity}</td>
+					<td className={style.tableCell}>
+						{product.weight * budget.price * product.quantity}
+					</td>
 				</tr>
 			))}
 		</table>

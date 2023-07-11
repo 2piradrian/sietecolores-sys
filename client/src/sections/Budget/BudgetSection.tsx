@@ -4,61 +4,10 @@ import useProducts from "@/hooks/useProducts";
 import ProductBudgetTable from "@/components/BudgetTable/ProductBudgetTable";
 import BudgetTable from "@/components/BudgetTable/BudgetTable";
 import Title from "@/components/Title/Title";
-import { QuantityProduct } from "@/types/types";
+import useBudget from "@/hooks/useBudget";
 
 function BudgetSection() {
-	const { products } = useProducts();
-	const [state, setState] = useState<QuantityProduct[]>([]);
-	const [price, setPrice] = useState<number>(0);
-
-	const addProduct = (id: string) => {
-		const existingProduct = state.find((product) => product.id === id);
-
-		if (existingProduct) {
-			// Si el producto ya existe, aumenta su cantidad en 1
-			setState((prevState) =>
-				prevState.map((product) =>
-					product.id === id ? { ...product, quantity: product.quantity + 1 } : product
-				)
-			);
-		} else {
-			// Si el producto no existe, añádelo con cantidad inicial de 1
-			const product = products.find((product) => product.id === id);
-			const quantityProduct = {
-				id: product!.id,
-				code: product!.code,
-				name: product!.name,
-				weight: product!.weight,
-				quantity: 1,
-			};
-
-			setState((prevState) => [...prevState, { ...quantityProduct }]);
-		}
-	};
-
-	const subtractProduct = (id: string) => {
-		setState((prevState) =>
-			prevState
-				.map((product) => {
-					if (product.id === id) {
-						// Restar 1 a la cantidad si es mayor a 1
-						if (product.quantity >= 1) {
-							return { ...product, quantity: product.quantity - 1 };
-						}
-					}
-					return product;
-				})
-				.filter((product) => product.quantity > 0)
-		);
-	};
-
-	const getTotal = () => {
-		let total = 0;
-		state.map((product) => {
-			total += product.weight * price * product.quantity;
-		});
-		return total;
-	};
+	const { products, budget, addProduct, subtractProduct, getTotal, setPrice } = useBudget();
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -76,14 +25,13 @@ function BudgetSection() {
 				<div className={style.tablecontainer}>
 					<ProductBudgetTable
 						products={products}
-						onClick={(id: string) => addProduct(id)}
+						onClick={(code: string) => addProduct(code)}
 					/>
 				</div>
 				<div className={style.tablecontainer}>
 					<BudgetTable
-						products={state}
-						price={price}
-						onClick={(id: string) => subtractProduct(id)}
+						budget={budget}
+						onClick={(code: string) => subtractProduct(code)}
 					/>
 				</div>
 			</div>

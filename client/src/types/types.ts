@@ -1,3 +1,20 @@
+export type BudgetProduct = {
+	code: string;
+	name: string;
+	quantity: number;
+	weight: number;
+};
+
+export type Budget = {
+	id: string;
+	price: number;
+	client: string;
+	createdAt: number;
+	products: BudgetProduct[];
+	total: number;
+};
+
+/* From backend */
 export type Product = {
 	id: string;
 	code: string;
@@ -7,34 +24,11 @@ export type Product = {
 	weight: number;
 };
 
-export type QuantityProduct = {
-	id: string;
-	code: string;
-	name: string;
-	quantity: number;
-	weight: number;
-};
-
+/* To edit backend */
 export type ProductForm = {
 	code: string;
 	name: string;
 	type: string;
 	size: string;
 	weight: number;
-};
-
-export type BudgetProduct = {
-	id: string;
-	price: number;
-	quantity: number;
-	product: Product;
-	budget: Budget;
-};
-
-export type Budget = {
-	id: string;
-	client: string;
-	createAt: Date;
-	products: Product[];
-	total: number;
 };

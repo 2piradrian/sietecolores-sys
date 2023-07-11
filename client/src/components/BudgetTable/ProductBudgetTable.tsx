@@ -16,7 +16,10 @@ function ProductBudgetTable({ products, onClick }: Props) {
 				<th className={style.tableHeader}>Peso</th>
 			</tr>
 			{products.map((product) => (
-				<tr className={style.tableRow} key={product.id} onClick={() => onClick(product.id)}>
+				<tr
+					className={style.tableRow}
+					key={product.code}
+					onClick={() => onClick(product.code)}>
 					<td className={style.tableCell}>{product.code}</td>
 					<td className={style.tableCell}>{product.name}</td>
 					<td className={style.tableCell}>{product.weight}</td>
