@@ -15,6 +15,16 @@ function useProducts() {
 	const fetchProducts = async () => {
 		try {
 			const response: AxiosResponse<Product[]> = await instance.get("");
+			// sort by code
+			response.data.sort((a, b) => {
+				if (a.code < b.code) {
+					return -1;
+				}
+				if (a.code > b.code) {
+					return 1;
+				}
+				return 0;
+			});
 			setProducts(response.data || []);
 			setError(null);
 			return response.data || [];

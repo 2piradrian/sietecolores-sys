@@ -82,7 +82,6 @@ function useStadistics() {
 		.slice(0, 5)
 		.map(([code, sales]) => ({ code, sales }));
 
-	// Devuelve las estadísticas o cualquier otro valor que desees exponer como resultado del hook
 	return {
 		productsSoldInMonth,
 		gramsSoldInMonth,

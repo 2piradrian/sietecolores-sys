@@ -23,6 +23,7 @@ function BudgetSection() {
 			return alert("Debes llenar todos los campos");
 		}
 		setPriceAndClient(Number(BudgetData.price), BudgetData.client.toString());
+		alert("Datos cargados correctamente");
 	};
 
 	return (
