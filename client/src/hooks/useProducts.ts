@@ -83,6 +83,7 @@ function useProducts() {
 			await fetchProducts();
 			return response.data || null;
 		} catch (error) {
+			alert((error as any).error);
 			setError("Error creating product");
 			return null;
 		}

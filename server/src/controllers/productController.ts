@@ -2,29 +2,29 @@ import { Request, Response } from "express";
 import { ProductService } from "../services/productService";
 
 export const ProductController = {
-	async getAllProducts(req: Request, res: Response) {
-		const products = await ProductService.getAllProducts();
-		res.json(products || []);
+	async getAll(req: Request, res: Response) {
+		const products = await ProductService.getAll();
+		return res.json(products || []);
 	},
-	async getProductById(req: Request, res: Response) {
+	async getById(req: Request, res: Response) {
 		const { id } = req.params;
-		const product = await ProductService.getProductById(id);
-		res.json(product || {});
+		const product = await ProductService.getById(id);
+		return res.json(product || {});
 	},
-	async createProduct(req: Request, res: Response) {
+	async create(req: Request, res: Response) {
 		const product = req.body;
-		const newProduct = await ProductService.createProduct(product);
-		res.json(newProduct || {});
+		const newProduct = await ProductService.create(product);
+		return res.json(newProduct || {});
 	},
-	async updateProduct(req: Request, res: Response) {
+	async update(req: Request, res: Response) {
 		const { id } = req.params;
 		const product = req.body;
-		const updatedProduct = await ProductService.updateProduct(id, product);
-		res.json(updatedProduct || {});
+		const updatedProduct = await ProductService.update(id, product);
+		return res.json(updatedProduct || {});
 	},
-	async deleteProduct(req: Request, res: Response) {
+	async delete(req: Request, res: Response) {
 		const { id } = req.params;
-		const deletedProduct = await ProductService.deleteProduct(id);
-		res.json(deletedProduct || {});
+		const deletedProduct = await ProductService.delete(id);
+		return res.json(deletedProduct || {});
 	},
 };

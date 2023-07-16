@@ -3,16 +3,16 @@ import { Request, Response } from "express";
 import { BudgetService } from "../services/budgetService";
 
 export const BudgetController = {
-	async getAllBudgets(req: Request, res: Response) {
-		const budgets = await BudgetService.getAllBudgets();
+	async getAll(req: Request, res: Response) {
+		const budgets = await BudgetService.getAll();
 		res.json(budgets || []);
 	},
-	async getBudgetById(req: Request, res: Response) {
+	async getById(req: Request, res: Response) {
 		const { id } = req.params;
-		const budget = await BudgetService.getBudgetById(id);
+		const budget = await BudgetService.getById(id);
 		res.json(budget || {});
 	},
-	async createBudget(req: Request, res: Response) {
+	async create(req: Request, res: Response) {
 		const budget = req.body;
 
 		let total = 0;
@@ -25,7 +25,7 @@ export const BudgetController = {
 
 		delete budget.id;
 
-		const newBudget = await BudgetService.createBudget(budget);
+		const newBudget = await BudgetService.create(budget);
 
 		res.json(newBudget);
 	},
