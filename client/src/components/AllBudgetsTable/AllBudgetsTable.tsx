@@ -25,6 +25,7 @@ function AllBudgetsTable({ budgets, setProducts, setOpen, setPrice, setTotal }: 
 					<th className={style.tableHeader}>Cliente</th>
 					<th className={style.tableHeader}>Fecha</th>
 					<th className={style.tableHeader}>Cant. Productos</th>
+					<th className={style.tableHeader}>Cant. Material</th>
 					<th className={style.tableHeader}>Total</th>
 				</tr>
 				{sortedBudgets.map((budget, index) => {
@@ -41,6 +42,11 @@ function AllBudgetsTable({ budgets, setProducts, setOpen, setPrice, setTotal }: 
 						return acc + product.quantity;
 					}, 0);
 
+					// suma de la cantidad de peso de cada producto
+					const weight = budget.products.reduce((acc, product) => {
+						return acc + product.weight * product.quantity;
+					}, 0);
+
 					return (
 						<tr
 							className={style.tableRow}
@@ -55,6 +61,7 @@ function AllBudgetsTable({ budgets, setProducts, setOpen, setPrice, setTotal }: 
 							<td className={style.tableCell}>{budget.client}</td>
 							<td className={style.tableCell}>{formattedDate}</td>
 							<td className={style.tableCell}>{quantity}</td>
+							<td className={style.tableCell}>{weight} gr.</td>
 							<td className={style.tableCell}>${budget.total}</td>
 						</tr>
 					);
