@@ -46,6 +46,16 @@ function useBudget() {
 		}
 	};
 
+	const getBudget = async (id: string): Promise<Budget | null> => {
+		try {
+			const response: AxiosResponse<Budget> = await instance.get(`/${id}`);
+			return response.data;
+		} catch (error) {
+			alert("Error al obtener el presupuesto");
+			return null;
+		}
+	};
+
 	const addProduct = (code: string) => {
 		const existingProduct = budget.products.find((product) => product.code === code);
 
@@ -106,6 +116,7 @@ function useBudget() {
 		setPriceAndClient,
 		createBudget,
 		budgetList,
+		getBudget,
 	};
 }
 

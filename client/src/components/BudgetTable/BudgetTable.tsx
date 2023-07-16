@@ -19,20 +19,24 @@ function BudgetTable({ products, price, onClick }: Props) {
 					<th className={style.tableHeader}>Precio U.</th>
 					<th className={style.tableHeader}>Precio T.</th>
 				</tr>
-				{products.map((product) => (
-					<tr
-						className={style.tableRow}
-						key={product.code}
-						onClick={onClick ? () => onClick(product.code) : () => {}}>
-						<td className={style.tableCell}>{product.code}</td>
-						<td className={style.tableCell}>{product.name}</td>
-						<td className={style.tableCell}>{product.quantity}</td>
-						<td className={style.tableCell}>$ {product.weight * price}</td>
-						<td className={style.tableCell}>
-							$ {product.weight * price * product.quantity}
-						</td>
-					</tr>
-				))}
+				{products.map((product, index) => {
+					return (
+						<>
+							<tr
+								className={style.tableRow}
+								key={product.code}
+								onClick={onClick ? () => onClick(product.code) : () => {}}>
+								<td className={style.tableCell}>{product.code}</td>
+								<td className={style.tableCell}>{product.name}</td>
+								<td className={style.tableCell}>{product.quantity}</td>
+								<td className={style.tableCell}>$ {product.weight * price}</td>
+								<td className={style.tableCell}>
+									$ {product.weight * price * product.quantity}
+								</td>
+							</tr>
+						</>
+					);
+				})}
 			</tbody>
 		</table>
 	);

@@ -1,21 +1,20 @@
 import React from "react";
 import style from "./style.module.css";
-import { Budget, BudgetProduct } from "@/types/types";
+import { Budget } from "@/types/types";
+import { useRouter } from "next/router";
 
 type Props = {
 	budgets: Budget[];
-	setProducts: (products: BudgetProduct[]) => void;
-	setOpen: (open: boolean) => void;
-	setPrice: (price: number) => void;
-	setTotal: (total: number) => void;
 };
 
-function AllBudgetsTable({ budgets, setProducts, setOpen, setPrice, setTotal }: Props) {
+function AllBudgetsTable({ budgets }: Props) {
 	const sortedBudgets = budgets.sort((a, b) => {
 		const dateA = a.createdAt instanceof Date ? a.createdAt : new Date(a.createdAt);
 		const dateB = b.createdAt instanceof Date ? b.createdAt : new Date(b.createdAt);
 		return dateB.getTime() - dateA.getTime();
 	});
+
+	const router = useRouter();
 
 	return (
 		<table className={style.budgetsTable}>
@@ -52,10 +51,7 @@ function AllBudgetsTable({ budgets, setProducts, setOpen, setPrice, setTotal }: 
 							className={style.tableRow}
 							key={budget.id}
 							onClick={() => {
-								setProducts(budget.products);
-								setPrice(budget.price);
-								setTotal(budget.total);
-								setOpen(true);
+								router.push(`/budget/${budget.id}`);
 							}}>
 							<td className={style.tableCell}>{index + 1}</td>
 							<td className={style.tableCell}>{budget.client}</td>
