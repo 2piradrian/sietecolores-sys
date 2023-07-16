@@ -9,8 +9,8 @@ export const ProductValidator = {
 		next();
 	},
 	update(req: Request, res: Response, next: NextFunction) {
-		const { name, price, weight, size } = req.body;
-		if (!name || !price || !weight || !size) {
+		const { name, weight, size, code, type } = req.body;
+		if (!name || !weight || !size || !code || !type) {
 			return res.status(400).json({ error: "Missing params" });
 		}
 		next();

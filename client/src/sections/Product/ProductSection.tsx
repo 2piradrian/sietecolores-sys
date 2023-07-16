@@ -8,15 +8,8 @@ import UpdateForm from "@/components/UpdateForm/UpdateForm";
 import CreateForm from "@/components/CreateForm/CreateForm";
 
 function ProductSection() {
-	const {
-		error,
-		products,
-		setSearch,
-		getProductById,
-		updateProduct,
-		createProduct,
-		deleteProduct,
-	} = useProducts();
+	const { products, setSearch, getProductById, updateProduct, createProduct, deleteProduct } =
+		useProducts();
 
 	const [openUpdate, setOpenUpdate] = useState(false);
 	const [openCreate, setOpenCreate] = useState(false);
@@ -35,7 +28,6 @@ function ProductSection() {
 				{products.length > 0 && (
 					<ProductTable products={products} onClick={handleForm} isComplete />
 				)}
-				<h2 className={style.error}>{error}</h2>
 			</div>
 			{openUpdate && (
 				<UpdateForm
