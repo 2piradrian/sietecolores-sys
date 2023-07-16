@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import style from "./style.module.css";
 import ProductBudgetTable from "@/components/BudgetTable/ProductBudgetTable";
 import BudgetTable from "@/components/BudgetTable/BudgetTable";
@@ -15,6 +15,15 @@ function BudgetSection() {
 		setPriceAndClient,
 		createBudget,
 	} = useBudget();
+
+	const budgetTableRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		if (budgetTableRef.current) {
+			budgetTableRef.current.scrollTop = budgetTableRef.current.scrollHeight;
+		}
+		console.log("budget.products", budget.products);
+	}, [budget.products]);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -44,7 +53,7 @@ function BudgetSection() {
 						onClick={(code: string) => addProduct(code)}
 					/>
 				</div>
-				<div className={style.tablecontainer}>
+				<div className={style.tablecontainer} ref={budgetTableRef}>
 					<BudgetTable
 						products={budget.products}
 						price={budget.price}
