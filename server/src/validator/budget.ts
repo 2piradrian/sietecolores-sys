@@ -30,4 +30,13 @@ export const BudgetValidator = {
 
 		next();
 	},
+	delete(req: Request, res: Response, next: NextFunction) {
+		const { id } = req.params;
+
+		if (!id) {
+			return res.status(400).json({ error: "Missing params" });
+		}
+
+		next();
+	},
 };

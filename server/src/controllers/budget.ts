@@ -29,4 +29,9 @@ export const BudgetController = {
 
 		res.json(newBudget);
 	},
+	async delete(req: Request, res: Response) {
+		const { id } = req.params;
+		const deletedBudget = await BudgetService.delete(id);
+		res.json(deletedBudget);
+	},
 };

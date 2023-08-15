@@ -27,7 +27,12 @@ function Budget() {
 	}, [id]);
 
 	return budget?.products ? (
-		<TableToPrint products={budget?.products} price={budget?.price} total={budget?.total} />
+		<TableToPrint
+			id={id}
+			products={budget?.products}
+			price={budget?.price}
+			total={budget?.total}
+		/>
 	) : (
 		<div>Cargando...</div>
 	);

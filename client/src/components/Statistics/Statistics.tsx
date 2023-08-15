@@ -1,15 +1,14 @@
 import React, { use } from "react";
 import style from "./style.module.css";
-import useStadistics from "@/hooks/useStadistics";
+import useStadistics from "@/hooks/useStatistics";
 
 function Statistics() {
 	const {
-		productsSoldInMonth,
 		gramsSoldInMonth,
-		productSoldMostInMonth,
-		productSoldMostInYear,
-		top10ProductsByYear,
-		top10ProductsByMonth,
+		topProductsByYear,
+		topProductsByMonth,
+		totalProductsSoldByMonth,
+		totalProductsSoldByYear,
 	} = useStadistics();
 
 	return (
@@ -18,7 +17,12 @@ function Statistics() {
 				<div className={style.card}>
 					<h3 className={style.h3}>Productos</h3>
 					<h4 className={style.h4}>vendidos en el mes</h4>
-					<p>{productsSoldInMonth}</p>
+					<p>{totalProductsSoldByMonth}</p>
+				</div>
+				<div className={style.card}>
+					<h3 className={style.h3}>Productos</h3>
+					<h4 className={style.h4}>vendidos en el año</h4>
+					<p>{totalProductsSoldByYear}</p>
 				</div>
 				<div className={style.card}>
 					<h3 className={style.h3}>Gramos</h3>
@@ -28,19 +32,19 @@ function Statistics() {
 				<div className={style.card}>
 					<h3 className={style.h3}>Producto</h3>
 					<h4 className={style.h4}>mas vendido en el mes</h4>
-					<p>{productSoldMostInMonth?.code || ""}</p>
+					<p>{topProductsByMonth[0]?.code || ""}</p>
 				</div>
 				<div className={style.card}>
 					<h3 className={style.h3}>Producto</h3>
 					<h4 className={style.h4}>mas vendido en el año</h4>
-					<p>{productSoldMostInYear?.code || ""}</p>
+					<p>{topProductsByYear[0]?.code || ""}</p>
 				</div>
 			</div>
 			<div className={style.topContainer}>
 				<div className={style.top}>
 					Top del mes
 					<ul>
-						{top10ProductsByMonth.map((product) => {
+						{topProductsByMonth.map((product) => {
 							return (
 								<li key={product.code}>
 									<p>
@@ -54,7 +58,7 @@ function Statistics() {
 				<div className={style.top}>
 					Top del año
 					<ul>
-						{top10ProductsByYear.map((product) => {
+						{topProductsByYear.map((product) => {
 							return (
 								<li key={product.code}>
 									<p>

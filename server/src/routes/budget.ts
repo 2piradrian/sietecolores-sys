@@ -7,3 +7,4 @@ export const budgetRouter = Router();
 budgetRouter.get("/", BudgetValidator.getAll, BudgetController.getAll);
 budgetRouter.get("/:id", BudgetValidator.getById, BudgetController.getById);
 budgetRouter.post("/", BudgetValidator.create, BudgetController.create);
+budgetRouter.delete("/:id", BudgetValidator.delete, BudgetController.delete);

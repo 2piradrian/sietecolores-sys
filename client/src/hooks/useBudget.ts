@@ -56,6 +56,17 @@ function useBudget() {
 		}
 	};
 
+	const deleteBudget = async (id: string): Promise<Budget | null> => {
+		try {
+			const response: AxiosResponse<Budget> = await instance.delete(`/${id}`);
+			alert("Presupuesto eliminado con éxito");
+			return response.data;
+		} catch (error) {
+			alert("Error al eliminar el presupuesto");
+			return null;
+		}
+	};
+
 	const addProduct = (code: string) => {
 		const existingProduct = budget.products.find((product) => product.code === code);
 
@@ -117,6 +128,7 @@ function useBudget() {
 		createBudget,
 		budgetList,
 		getBudget,
+		deleteBudget,
 	};
 }
 
