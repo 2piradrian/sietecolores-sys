@@ -111,7 +111,7 @@ function useBudget() {
 		budget.products.map((product) => {
 			total += product.weight * budget.price * product.quantity;
 		});
-		return total;
+		return total.toFixed(2);
 	};
 
 	const setPriceAndClient = (price: number, client: string) => {

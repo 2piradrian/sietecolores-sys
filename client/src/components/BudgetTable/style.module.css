@@ -1,5 +1,5 @@
 .productTable {
-	width: 95%;
+	width: 98%;
 	border-collapse: collapse;
 	position: absolute;
 	user-select: none;
@@ -9,6 +9,7 @@
 	background-color: var(--main);
 	font-weight: bold;
 	padding: 8px;
+	font-size: 14px;
 	text-align: left;
 	position: sticky;
 	top: 0;
@@ -23,6 +24,7 @@
 
 .tableRow {
 	height: 45px;
+	font-size: 13px;
 	transition: all 0.3s ease;
 	cursor: pointer;
 	user-select: none;

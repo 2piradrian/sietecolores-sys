@@ -39,7 +39,13 @@ function BudgetSection() {
 		<div className="bigcontainer">
 			<Title title="Nuevo Presupuesto" />
 			<form onSubmit={handleSubmit}>
-				<input type="number" placeholder="Gramo" name="price" className={style.input} />
+				<input
+					type="number"
+					step="0.01"
+					placeholder="Gramo"
+					name="price"
+					className={style.input}
+				/>
 				<input type="text" placeholder="Cliente" name="client" className={style.input} />
 				<button type="submit" className={style.button}>
 					Cargar datos

@@ -10,7 +10,6 @@ function Statistics() {
 		totalProductsSoldByMonth,
 		totalProductsSoldByYear,
 	} = useStadistics();
-
 	return (
 		<>
 			<div className={style.container}>
@@ -32,42 +31,50 @@ function Statistics() {
 				<div className={style.card}>
 					<h3 className={style.h3}>Producto</h3>
 					<h4 className={style.h4}>mas vendido en el mes</h4>
-					<p>{topProductsByMonth[0]?.code || ""}</p>
+					<p>{topProductsByMonth[0]?.code || "😭"}</p>
 				</div>
 				<div className={style.card}>
 					<h3 className={style.h3}>Producto</h3>
 					<h4 className={style.h4}>mas vendido en el año</h4>
-					<p>{topProductsByYear[0]?.code || ""}</p>
+					<p>{topProductsByYear[0]?.code || "😿"}</p>
 				</div>
 			</div>
 			<div className={style.topContainer}>
 				<div className={style.top}>
 					Top del mes
-					<ul>
-						{topProductsByMonth.map((product) => {
-							return (
-								<li key={product.code}>
-									<p>
-										{product.code}: {product.sales}
-									</p>
-								</li>
-							);
-						})}
-					</ul>
+					{topProductsByMonth.length > 0 ? (
+						<ul>
+							{topProductsByMonth.map((product) => {
+								return (
+									<li key={product.code}>
+										<p>
+											{product.code}: {product.sales}
+										</p>
+									</li>
+								);
+							})}
+						</ul>
+					) : (
+						<p>{"No hay top😿"}</p>
+					)}
 				</div>
 				<div className={style.top}>
 					Top del año
-					<ul>
-						{topProductsByYear.map((product) => {
-							return (
-								<li key={product.code}>
-									<p>
-										{product.code}: {product.sales}
-									</p>
-								</li>
-							);
-						})}
-					</ul>
+					{topProductsByYear.length > 0 ? (
+						<ul>
+							{topProductsByYear.map((product) => {
+								return (
+									<li key={product.code}>
+										<p>
+											{product.code}: {product.sales}
+										</p>
+									</li>
+								);
+							})}
+						</ul>
+					) : (
+						<p>{"No hay top😿"}</p>
+					)}
 				</div>
 			</div>
 		</>

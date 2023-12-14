@@ -36,13 +36,13 @@ function useProducts() {
 	useEffect(() => {
 		const filterProducts = async () => {
 			const data = await fetchProducts();
-			const filteredProducts = data!.filter((product) => {
+			const filteredProducts = data?.filter((product) => {
 				return (
 					product.name.toLowerCase().includes(search.toLowerCase()) ||
 					product.code.toLowerCase().includes(search.toLowerCase())
 				);
 			});
-			setProducts(filteredProducts);
+			setProducts(filteredProducts || []);
 		};
 		filterProducts();
 	}, [search]);
