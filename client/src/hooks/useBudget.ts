@@ -35,7 +35,7 @@ function useBudget() {
 			return null;
 		}
 		try {
-			const response: AxiosResponse<Product> = await instance.post("", budget);
+			const response: AxiosResponse<Product> = await instance.post("", { budget });
 			if (response.data) {
 				alert("Presupuesto creado con éxito");
 			}
@@ -111,6 +111,7 @@ function useBudget() {
 		budget.products.map((product) => {
 			total += product.weight * budget.price * product.quantity;
 		});
+		budget.total = parseFloat(total.toFixed(2));
 		return total.toFixed(2);
 	};
 

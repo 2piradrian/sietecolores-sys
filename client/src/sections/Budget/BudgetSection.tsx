@@ -22,7 +22,6 @@ function BudgetSection() {
 		if (budgetTableRef.current) {
 			budgetTableRef.current.scrollTop = budgetTableRef.current.scrollHeight;
 		}
-		console.log("budget.products", budget.products);
 	}, [budget.products]);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

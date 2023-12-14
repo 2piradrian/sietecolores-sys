@@ -23,7 +23,6 @@ function Budget() {
 				setBudget(budget);
 			});
 		}
-		console.log(id);
 	}, [id]);
 
 	return budget?.products ? (

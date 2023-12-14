@@ -1,42 +1,51 @@
 import { NextFunction, Request, Response } from "express";
 
+import { ErrorType } from "../error/ErrorType";
+
 export const BudgetValidator = {
 	getAll(req: Request, res: Response, next: NextFunction) {
 		next();
 	},
 	getById(req: Request, res: Response, next: NextFunction) {
-		const { id } = req.params;
-
-		if (!id) {
-			return res.status(400).json({ error: "Missing params" });
+		try {
+			const { id } = req.params;
+			if (!id) {
+				return res.status(400).json({ error: ErrorType.missingFields });
+			}
+			next();
+		} catch (err) {
+			return res.status(500).json({ error: ErrorType.internalError });
 		}
-
-		next();
 	},
 	create(req: Request, res: Response, next: NextFunction) {
-		const { budget } = req.body;
+		try {
+			const { budget } = req.body;
 
-		if (!budget) {
-			return res.status(400).json({ error: "Missing params" });
+			if (budget === undefined) {
+				return res.status(400).json({ error: ErrorType.missingFields });
+			}
+
+			if (budget.products === undefined || !budget.products.length) {
+				return res.status(400).json({ error: ErrorType.missingFields });
+			}
+
+			if (!budget.price) {
+				return res.status(400).json({ error: ErrorType.missingFields });
+			}
+			next();
+		} catch (err) {
+			return res.status(500).json({ error: ErrorType.internalError });
 		}
-
-		if (!budget.products || !budget.products.length) {
-			return res.status(400).json({ error: "Missing products" });
-		}
-
-		if (!budget.price) {
-			return res.status(400).json({ error: "Missing price" });
-		}
-
-		next();
 	},
 	delete(req: Request, res: Response, next: NextFunction) {
-		const { id } = req.params;
-
-		if (!id) {
-			return res.status(400).json({ error: "Missing params" });
+		try {
+			const { id } = req.params;
+			if (!id) {
+				return res.status(400).json({ error: ErrorType.missingFields });
+			}
+			next();
+		} catch (err) {
+			return res.status(500).json({ error: ErrorType.internalError });
 		}
-
-		next();
 	},
 };
