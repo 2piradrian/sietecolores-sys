@@ -18,13 +18,15 @@ function UpdateInputs({ product, setOpen, deleteProduct }: Props) {
 		weight: product!.weight,
 	});
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		setFormData((prevFormData) => ({
 			...prevFormData,
 			[name]: value,
 		}));
 	};
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {};
 
 	return (
 		<>
@@ -44,14 +46,32 @@ function UpdateInputs({ product, setOpen, deleteProduct }: Props) {
 				value={formData.name}
 				onChange={handleInputChange}
 			/>
-			<label htmlFor="type">Tipo</label>
-			<input
-				type="text"
-				name="type"
-				id="type"
-				value={formData.type}
-				onChange={handleInputChange}
-			/>
+			<label htmlFor="type">Tipo (Categoria)</label>
+			<select name="type" id="type" value={formData.type} onChange={handleInputChange}>
+				<option>Animales</option>
+				<option>Artesanos</option>
+				<option>Bautismo</option>
+				<option>Cielo</option>
+				<option>Comunión</option>
+				<option>Contramoldes</option>
+				<option>Deportes</option>
+				<option>Formas</option>
+				<option>Granja</option>
+				<option>Halloween</option>
+				<option>Letras y números</option>
+				<option>Marcos</option>
+				<option>Navidad</option>
+				<option>Pascuas</option>
+				<option>Personajes</option>
+				<option>Plantas</option>
+				<option>Profesiones</option>
+				<option>Scrapers</option>
+				<option>Sellos</option>
+				<option>Texturizadores</option>
+				<option>Toppers</option>
+				<option>Transportes</option>
+				<option>Varios</option>
+			</select>
 			<label htmlFor="size">Tamaño</label>
 			<input
 				type="text"
