@@ -51,12 +51,10 @@ function UpdateInputs({ product, setOpen, deleteProduct }: Props) {
 				<option>Animales</option>
 				<option>Artesanos</option>
 				<option>Bautismo</option>
-				<option>Cielo</option>
 				<option>Comunión</option>
 				<option>Contramoldes</option>
 				<option>Deportes</option>
 				<option>Formas</option>
-				<option>Granja</option>
 				<option>Halloween</option>
 				<option>Letras y números</option>
 				<option>Marcos</option>
